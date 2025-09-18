@@ -1,0 +1,86 @@
+import 'dart:io';
+
+void main() {
+
+  print("Are You Ready To Smash!");
+  print("Answer the questions by typing 1, 2, 3, or 4");
+  print(" =" * 10);
+
+
+  List<String> questions = [
+    "What is the capital of France?",
+    "Which planet is known as the Red Planet?",
+    "What is 5 + 3?",
+    "Which language is used for Flutter development?"
+  ];
+
+
+  List<List<String>> options = [
+    ["1. London", "2. Berlin", "3. Paris", "4. Madrid"],
+    ["1. Venus", "2. Mars", "3. Jupiter", "4. Saturn"],
+    ["1. 6", "2. 8", "3. 10", "4. 7"],
+    ["1. Java", "2. Python", "3. Dart", "4. C++"]
+  ];
+
+
+  List<int> correctAnswers = [3, 2, 2, 3];
+
+
+  int score = 0;
+  List<int> userAnswers = [];
+
+
+  for (int i = 0; i < questions.length; i++) {
+    print("\nQuestion ${i + 1}: ${questions[i]}");
+
+
+    for (String option in options[i]) {
+      print(option);
+    }
+
+
+    print("Your answer (1-4): ");
+    String? input = stdin.readLineSync();
+    int userAnswer = int.parse(input ?? "0");
+
+
+    userAnswers.add(userAnswer);
+
+
+    if (userAnswer == correctAnswers[i]) {
+      print(" Correct! Great job!");
+      score++;
+    } else {
+      print(" Incorrect. The correct answer was ${correctAnswers[i]}");
+    }
+
+    print(" *" * 10);
+  }
+
+
+  print("\n QUIZ COMPLETED! ");
+  print(" =" * 10);
+  print("Your final score: $score out of ${questions.length}");
+
+
+  double percentage = (score / questions.length) * 100;
+  print("Percentage: ${percentage.toStringAsFixed(1)}%");
+
+
+  if (percentage >= 80) {
+    print(" Excellent! You're a quiz master!");
+  } else if (percentage >= 60) {
+    print(" Good job! Keep learning!");
+  } else {
+    print(" Keep studying and try again!");
+  }
+
+
+  print("\n ANSWER REVIEW:");
+  print("=" * 40);
+  for (int i = 0; i < questions.length; i++) {
+    String status = userAnswers[i] == correctAnswers[i] ? "Right" : "Wrong";
+    print("Q${i + 1}: $status Your answer: ${userAnswers[i]}, Correct: ${correctAnswers[i]}");
+  }
+}
+
